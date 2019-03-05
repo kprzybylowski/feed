@@ -1,7 +1,7 @@
 ##Installation:
+
+
 #####Tools:
-
-
 `$ sudo apt-get install apache2`  
 `$ sudo a2enmod rewrite`  
 `$ sudo apt-get install mysql-server`  
@@ -27,5 +27,6 @@
 ##### Laravel:
 `$ composer create-project laravel/laravel feed 5.5.*`  
 `$ php artisan migrate`  
+
 
 ##Database structure:
