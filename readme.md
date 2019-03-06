@@ -27,7 +27,7 @@
     $ php artisan migrate
 
 
-##Database structure:
+## Database structure:
 
 
 #### Tables:
