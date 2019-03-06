@@ -1,4 +1,4 @@
-## Installation:
+#### Installation:
 
     $ sudo apt-get install apache2  
     $ sudo a2enmod rewrite  
