@@ -26,4 +26,11 @@
     $ composer create-project laravel/laravel feed 5.5.*
     $ php artisan migrate
 
+
 ##Database structure:
+
+
+#### Tables:
+    Companies
+    Feed
+    Feed_item
