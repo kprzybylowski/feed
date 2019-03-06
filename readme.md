@@ -1,20 +1,18 @@
-  
-##Installation:  
+## Installation:
 
-
-#####Tools:
-`$ sudo apt-get install apache2`  
-`$ sudo a2enmod rewrite`  
-`$ sudo apt-get install mysql-server`  
-`$ sudo add-apt-repository ppa:ondrej/php`  
-`$ sudo apt-get install php7.0`  
-`$ sudo apt-get install php7.0-curl`  
-`$ sudo apt-get install php7.0-mbstring`  
-`$ sudo apt-get install php7.0-xml`  
-`$ sudo apt-get install php7.0-zip`  
-`$ sudo apt-get install php7.0-mysql`  
-`$ sudo apt-get install composer`  
-
+'''sh
+$ sudo apt-get install apache2  
+$ sudo a2enmod rewrite  
+$ sudo apt-get install mysql-server  
+$ sudo add-apt-repository ppa:ondrej/php  
+$ sudo apt-get install php7.0  
+$ sudo apt-get install php7.0-curl  
+$ sudo apt-get install php7.0-mbstring  
+$ sudo apt-get install php7.0-xml  
+$ sudo apt-get install php7.0-zip  
+$ sudo apt-get install php7.0-mysql  
+$ sudo apt-get install composer  
+'''
 
 
 ##### Database config:
