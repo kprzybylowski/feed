@@ -26,6 +26,11 @@
     $ composer create-project laravel/laravel feed 5.5.*
     $ php artisan migrate
 
+#####Create initial admin user
+    $ php artisan tinker
+    >>> $user = new App\Models\User();
+    >>> $user->createAdminUser('feedadmin@uniled.co.uk', 'your_password')
+    >>> exit();
 
 ## Database structure:
 
