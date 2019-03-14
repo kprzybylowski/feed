@@ -17,7 +17,7 @@
 ##### Database config:
     $ mysql -u root -p (or $ sudo mysql)  
     mysql> CREATE DATABASE feed;  
-    mysql> CREATE USER 'feed'@'localhost' IDENTIFIED BY 'your_pass'; *(set the same password in your .env file)*  
+    mysql> CREATE USER 'feed'@'localhost' IDENTIFIED BY 'your_pass'; (set the same password in your .env file)    
     mysql> GRANT ALL PRIVILEGES ON feed.* TO 'feed'@'localhost';  
     mysql> FLUSH PRIVILEGES;`  
     mysql> \q
@@ -29,7 +29,7 @@
 ##### Create initial admin user:
     $ php artisan tinker
     >>> $user = new App\Models\User();  
-    >>> $user->createAdminUser('feedadmin@uniled.co.uk', 'your_password')  
+    >>> $user->createAdminUser('admin@email.co.uk', 'your_password')  
     >>> exit();
 
 ## Database structure:
