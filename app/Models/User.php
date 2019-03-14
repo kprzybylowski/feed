@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'company_id', 'role_id',
     ];
 
     /**
@@ -34,7 +34,15 @@ class User extends Authenticatable
      */
     public function Role()
     {
-        return $this->hasOne('App\Models\UsersRoles', 'id', 'role');
+        return $this->hasOne('App\Models\UsersRoles', 'id', 'role_id');
+    }
+
+    /**
+     * Get user's company
+     */
+    public function Company()
+    {
+        return $this->hasOne('App\Models\Companies', 'id', 'company_id');
     }
 
     /**
@@ -51,16 +59,20 @@ class User extends Authenticatable
         if ($existing > 0) {
             return 'This method applies only for creating an initial application user. Try to log in using existing user credentials';
         } else {
+            $adminName = 'Administrator';
+            $adminCompanyName = 'Uniled';
             $role = DB::table('users_roles')->where('code', 'admin')->first()->id;
-            if ($role) {
+            $company = DB::table('companies')->insertGetId(['name' => 'Uniled', 'created_at' => now(), 'updated_at' => now()]);
+            if (!empty($role) && !empty($company)) {
                 $this->name = 'Administrator';
                 $this->email = $email;
                 $this->password = Hash::make($password);
-                $this->role = $role;
+                $this->company_id = $company;
+                $this->role_id = $role;
                 $this->save();
                 return 'Admin user created.';
             } else {
-                return 'No users roles available.';
+                return 'No users roles or company available.';
             }
         }
     }

@@ -4,7 +4,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class UsersRoles extends Model
+class Companies extends Model
 {
 
     use SoftDeletes;
@@ -14,7 +14,7 @@ class UsersRoles extends Model
      *
      * @var string
      */
-    protected $table = 'users_roles';
+    protected $table = 'companies';
 
     /**
      * Primary key field.
@@ -28,7 +28,7 @@ class UsersRoles extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'code'];
+    protected $fillable = ['name'];
 
     /**
      * The attributes that should be mutated to dates.
@@ -38,10 +38,10 @@ class UsersRoles extends Model
     protected $dates = ['created_at', 'updated_at', 'deleted_at'];
 
     /**
-     * Get role's users
+     * Get company's users
      */
     public function Users()
     {
-    return $this->hasMany('App\Models\User', 'role');
+    return $this->hasMany('App\Models\User', 'company');
     }
 }
