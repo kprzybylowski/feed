@@ -17,20 +17,26 @@
 ##### Database config:
     $ mysql -u root -p (or $ sudo mysql)  
     mysql> CREATE DATABASE feed;  
-    mysql> CREATE USER 'feed'@'localhost' IDENTIFIED BY 'your_pass'; (set the same password in your .env file)    
+    mysql> CREATE USER 'feed'@'localhost' IDENTIFIED BY 'your_password'; (set the same password in your .env and/or config/database.php file)    
     mysql> GRANT ALL PRIVILEGES ON feed.* TO 'feed'@'localhost';  
     mysql> FLUSH PRIVILEGES;`  
     mysql> \q
 
 ##### Laravel:
     $ composer create-project laravel/laravel feed 5.5.*
-    $ php artisan migrate
+    $ git remote add origin https://github.com/kprzybylowski/feed.git
+    $ php artisan migrate (apply all database migrations)
+    $ php artisan db:seed (insert data to users_roles)
+    $ php artisan storage:link (create a symbolic link from "public/storage" to "storage/app/public")
 
 ##### Create initial admin user:
     $ php artisan tinker
     >>> $user = new App\Models\User();  
     >>> $user->createAdminUser('admin@email.co.uk', 'your_password')  
     >>> exit();
+    
+    This option can be executed only once. If you want to generate the initial admin user again, first you have to rebuild entire database with:  
+    $ php artisan migrate:refresh --seed
 
 ## Database structure:
 

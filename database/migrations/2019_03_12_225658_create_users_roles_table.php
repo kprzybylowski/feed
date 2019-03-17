@@ -20,6 +20,10 @@ class CreateUsersRolesTable extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
+
+        Schema::table('users', function (Blueprint $table) {
+            $table->foreign('role_id')->references('id')->on('users_roles');
+        });
     }
 
     /**
@@ -29,6 +33,10 @@ class CreateUsersRolesTable extends Migration
      */
     public function down()
     {
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropForeign('users_role_id_foreign');
+        });
+
         Schema::dropIfExists('users_roles');
     }
 }
