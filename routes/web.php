@@ -15,3 +15,5 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::any('/register', 'HomeController@index')->name('register'); //disable registration
+
+Route::any('/feed', 'FeedController@index')->name('feed');

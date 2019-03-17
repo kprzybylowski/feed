@@ -19,6 +19,10 @@ class CreateCompaniesTable extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
+
+        Schema::table('users', function (Blueprint $table) {
+            $table->foreign('company_id')->references('id')->on('companies');
+        });
     }
 
     /**
@@ -28,6 +32,10 @@ class CreateCompaniesTable extends Migration
      */
     public function down()
     {
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropForeign('users_company_id_foreign');
+        });
+
         Schema::dropIfExists('companies');
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Companies extends Model
+class Feed extends Model
 {
 
     use SoftDeletes;
@@ -14,7 +14,7 @@ class Companies extends Model
      *
      * @var string
      */
-    protected $table = 'companies';
+    protected $table = 'feed';
 
     /**
      * Primary key field.
@@ -28,7 +28,7 @@ class Companies extends Model
      *
      * @var array
      */
-    protected $fillable = ['name'];
+    protected $fillable = ['company_id', 'name', 'created_by'];
 
     /**
      * The attributes that should be mutated to dates.
@@ -38,26 +38,26 @@ class Companies extends Model
     protected $dates = ['created_at', 'updated_at', 'deleted_at'];
 
     /**
-     * Get company users
+     * Get feed's creator
      */
-    public function Users()
+    public function Creator()
     {
-    return $this->hasMany('App\Models\User', 'company_id', 'id');
+        return $this->hasOne('App\Models\Users', 'id', 'created_by');
     }
 
     /**
-     * Get company images
+     * Get feed's company
      */
-    public function Images()
+    public function Company()
     {
-    return $this->hasMany('App\Models\Images', 'company_id', 'id');
+        return $this->hasOne('App\Models\Companies', 'id', 'company_id');
     }
 
     /**
-     * Get company feeds
+     * Get feed's items
      */
-    public function Feeds()
+    public function Items()
     {
-    return $this->hasMany('App\Models\Feed', 'company_id', 'id');
+        return $this->hasMany('App\Models\FeedItems', 'feed_id', 'id');
     }
 }
