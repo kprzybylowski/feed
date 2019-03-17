@@ -42,6 +42,12 @@
 
 
 #### Tables:
-    Companies
-    Feed
-    Feed_item
+    companies
+    feed
+    feed_item
+    images
+    live_feed
+    migrations
+    password_resets
+    users
+    users_roles
