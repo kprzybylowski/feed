@@ -61,8 +61,8 @@ class FeedService
             ->get();
 
         if (!empty($liveFeed->toArray())) {
-            $data = $liveFeed->map(function($row) use ($imgPath) {
-                $items = $row->FeedItems->map(function($item) use ($imgPath) {
+            $data = $liveFeed->map(function($row) {
+                $items = $row->FeedItems->map(function($item) {
                     return [
                         'primary_image' => asset('storage/'.$item->PrimaryImage->name),
                         'secondary_image' => asset('storage/'.$item->SecondaryImage->name),
