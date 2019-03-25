@@ -34,4 +34,15 @@ class UserService
         $currentUser = $this->usersModel->with('Company')->with('Role')->find($id);
 		return $currentUser;
 	}
+
+	/**
+	 * Method gets users list
+	 * 
+	 * @return object
+	 */
+	public function getUses()
+	{
+        $usersList = $this->usersModel->with('Company')->with('Role')->get();
+		return $usersList;
+	}
 }

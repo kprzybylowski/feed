@@ -32,7 +32,8 @@ class UserController extends Controller
      */
     public function browse(Request $request)
     {
-        return view('user_browse');
+        $usersList = $this->userService->getUses();
+        return view('user_browse', ['users'=>$usersList]);
     }
 
     /**
