@@ -17,4 +17,15 @@ class CompanyService
     {
         $this->companyModel = $company;
     }
+
+	/**
+	 * Method gets companies list
+	 * 
+	 * @return object
+	 */
+	public function getCompanies()
+	{
+        $companiesList = $this->companyModel->get();
+		return $companiesList;
+	}
 }

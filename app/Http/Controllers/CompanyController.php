@@ -32,7 +32,8 @@ class CompanyController extends Controller
      */
     public function browse(Request $request)
     {
-        return view('company_browse');
+        $companiesList = $this->companyService->getCompanies();
+        return view('company_browse', ['companies'=>$companiesList]);
     }
 
     /**
