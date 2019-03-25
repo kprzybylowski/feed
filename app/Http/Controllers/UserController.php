@@ -5,39 +5,26 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use Exception;
-use App\Services\FeedService;
+use App\Services\UserService;
 
-class FeedController extends Controller
+class UserController extends Controller
 {
-    protected $feedService;
+    protected $userService;
 
     /**
      * Create a new controller instance.
      * 
-     * @param FeedService $feedService
+     * @param CompanyService $companyService
      *
      * @return void
      */
-    public function __construct(FeedService $feedService)
+    public function __construct(UserService $userService)
     {
-        $this->feedService = $feedService;
+        $this->userService = $userService;
     }
 
     /**
-     * Action generates live feed.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $liveFeed = $this->feedService->getLiveFeed();
-        $jsonFeed = json_encode($liveFeed, JSON_UNESCAPED_SLASHES);
-
-        return $jsonFeed;
-    }
-
-    /**
-     * Edit feed
+     * Shows a list of available users
      * 
      * @param \Illuminate\Http\Request $request Request data collection
      *
@@ -45,11 +32,11 @@ class FeedController extends Controller
      */
     public function browse(Request $request)
     {
-        return view('feed_browse');
+        return view('user_browse');
     }
 
     /**
-     * Edit feed
+     * Edit company
      * 
      * @param \Illuminate\Http\Request $request Request data collection
      *
@@ -57,11 +44,11 @@ class FeedController extends Controller
      */
     public function edit(Request $request)
     {
-        return view('feed_edit');
+        return view('user_edit');
     }
 
     /**
-     * Save feed
+     * Save company
      * 
      * @param \Illuminate\Http\Request $request Request data collection
      *
@@ -69,7 +56,6 @@ class FeedController extends Controller
      */
     public function save(Request $request)
     {
-        return redirect('/feed/browse')->with($message, $message)->with('type', $type);
-
+        return redirect('/user/browse')->with($message, $message)->with('type', $type);
     }
 }
