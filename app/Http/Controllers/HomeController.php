@@ -31,10 +31,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
-        $currentUser = $this->userService->getCurrentUser($user->id);
-        dump($currentUser->role->code);
-
-        return view('home');
+        return redirect('/feed/browse');
     }
 }
