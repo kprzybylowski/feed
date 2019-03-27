@@ -12,6 +12,7 @@
             <div class="card">
                 <div class="card-header">Users</div>
                 <div class="card-body">
+                    <a href="/user/edit" class="btn btn-outline-secondary btn-sm mb-3">Add user</a>
                     <table class="table table-striped table-hover table-sm">
                         <thead>
                             <th scope="col">Id</th>

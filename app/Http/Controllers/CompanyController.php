@@ -45,7 +45,13 @@ class CompanyController extends Controller
      */
     public function edit(Request $request)
     {
-        return view('company_edit');
+        $id = $request->route('id');
+        $company = null;
+        if (!empty($id)) {
+            $company = $this->companyService->getCompany($id);
+        }
+
+        return view('company_edit', ['company'=>$company]);
     }
 
     /**
@@ -57,6 +63,32 @@ class CompanyController extends Controller
      */
     public function save(Request $request)
     {
+        $companyData = $request->except(['_token']);
+        if (!empty($companyData)) {
+            $this->companyService->saveCompany($companyData);
+        }
+
+        $message = 'ok';
+        $type = 'success';
+        return redirect('/company/browse')->with($message, $message)->with('type', $type);
+    }
+
+    /**
+     * Delete company
+     * 
+     * @param \Illuminate\Http\Request $request Request data collection
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function delete(Request $request)
+    {
+        $id = $request->route('id');
+        if (!empty($id)) {
+            $this->companyService->deleteCompany($id);
+        }
+
+        $message = 'ok';
+        $type = 'success';
         return redirect('/company/browse')->with($message, $message)->with('type', $type);
     }
 }
