@@ -6,3 +6,24 @@
 
 // Bootstrap
 @import "~bootstrap/scss/bootstrap";
+
+body {
+    background-color: #ddd;
+}
+
+.navbar-dark {
+    -moz-box-shadow: 0 0 20px black;
+    -webkit-box-shadow: 0 0 20px black;
+    box-shadow: 0 0 20px black;
+}
+
+.bg-dark-custom {
+    background-color: #222 !important;
+}
+
+.card {
+    border-color: #bbb;
+    -moz-box-shadow: 5px 5px 30px #bbb;
+    -webkit-box-shadow: 5px 5px 30px #bbb;
+    box-shadow: 5px 5px 30px #bbb;
+}

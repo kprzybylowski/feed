@@ -7,9 +7,9 @@
 
 @section('content')
 <div class="container">
-    <div class="row mt-3">
+    <div class="row mt-4">
         <div class="col-md-12">
-            <div class="card">
+            <div class="card card-custom">
                 <div class="card-header">{{ empty($company)?'New company':'Company edit'}}</div>
                 <div class="card-body">
                     <form method="post" action="/company/save">
