@@ -8,7 +8,6 @@ class Companies extends Model
 {
 
     use SoftDeletes;
-    public $timestamps = true;
 
     /**
      * The database table used by the model.
