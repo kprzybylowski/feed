@@ -31,8 +31,8 @@
                                     <td class="align-middle">{{ $user->company->name }}</td>
                                     <td class="align-middle">{{ $user->role->name }}</td>
                                     <td class="align-middle text-right">
-                                        <button class="btn btn-outline-secondary btn-sm">Edit</button>
-                                        <button class="btn btn-outline-danger btn-sm">Delete</button>
+                                        <a href="/user/edit/{{$user->id}}" class="btn btn-outline-secondary btn-sm">Edit</a>
+                                        <a href="/user/delete/{{$user->id}}" class="btn btn-outline-danger btn-sm" onclick="return confirm('Are you sure you want to delete user {{ $user->name }} ?')">Delete</a>
                                     </td>
                                 </tr>
                             @endforeach

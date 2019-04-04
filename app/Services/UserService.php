@@ -2,6 +2,7 @@
 
 use App\Models\User;
 use App\Models\UsersRoles;
+use Illuminate\Support\Facades\Hash;
 
 class UserService
 {
@@ -29,10 +30,21 @@ class UserService
 	 * 
 	 * @return object
 	 */
-	public function getCurrentUser($id)
+	public function getUser($id)
 	{
-        $currentUser = $this->usersModel->with('Company')->with('Role')->find($id);
-		return $currentUser;
+        $user = $this->usersModel->with('Company')->with('Role')->find($id);
+		return $user;
+	}
+
+	/**
+	 * Method gets users roles
+	 * 
+	 * @return object
+	 */
+	public function getUsersRoles()
+	{
+        $roles = $this->usersRolesModel->get();
+		return $roles;
 	}
 
 	/**
@@ -40,9 +52,45 @@ class UserService
 	 * 
 	 * @return object
 	 */
-	public function getUses()
+	public function getUsers()
 	{
         $usersList = $this->usersModel->with('Company')->with('Role')->get();
 		return $usersList;
+	}
+
+	/**
+	 * Method saves/creates new company
+     * 
+     * @param array $data Company data collection
+     * 
+	 * @return object
+	 */
+	public function saveUser($data)
+	{
+        if (!empty($data['password'])) {
+            $data['password'] = Hash::make($data['password']);
+        } else {
+            unset($data['password']);
+        }
+
+        if (empty($data['id'])) {
+            return $this->usersModel->create($data);
+        } else {
+            return $this->usersModel->where('id', $data['id'])->update($data);
+        }
+	}
+
+	/**
+	 * Method deletes user
+     * 
+     * @param integer $id User identifier
+     * 
+	 * @return object
+	 */
+	public function deleteUser($id)
+	{
+        if (!empty($id)) {
+            return $this->usersModel->where('id', $id)->delete();
+        }
 	}
 }

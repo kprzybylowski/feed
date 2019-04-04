@@ -26,6 +26,6 @@ Route::get('/company/edit/{id?}', 'CompanyController@edit')->name('company_edit'
 Route::any('/company/delete/{id}', 'CompanyController@delete')->name('company_delete')->middleware('auth', 'admin');
 Route::post('/company/save', 'CompanyController@save')->name('company_save')->middleware('auth', 'admin');
 Route::get('/user/browse', 'UserController@browse')->name('user_browse')->middleware('auth', 'admin');
-Route::get('/user/edit/{id}', 'UserController@edit')->name('user_edit')->middleware('auth', 'admin');
+Route::get('/user/edit/{id?}', 'UserController@edit')->name('user_edit')->middleware('auth', 'admin');
 Route::get('/user/delete/{id}', 'UserController@delete')->name('user_delete')->middleware('auth', 'admin');
 Route::post('/user/save', 'UserController@save')->name('user_save')->middleware('auth', 'admin');

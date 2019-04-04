@@ -15,17 +15,11 @@
 </head>
 <body>
 
-    @if(session()->has('message'))
-        <div class="alert alert-{{ session()->get('type') }}">
-            {{ session()->get('message') }}
-        </div>
-    @endif
-
 <div id="app">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark-custom">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark-custom fixed-top">
         <div class="container">
             <a class="navbar-brand mr-5" href="{{ url('/') }}">
-                <img src="{{URL::asset('/img/logo_inv.png')}}" alt="Uniled logo">
+                <img src="{{URL::asset('/img/logo.png')}}" alt="Uniled logo">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -78,10 +72,22 @@
         </div>
     </nav>
 
+    @if(session()->has('message'))
+        <div class="alert alert-{{ session()->get('type') }}">
+            <span class="msg"> {{ session('message') }}</span>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
+
+    <div class="pt-5">
     @yield('content')
+    </div>
 </div>
 
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 </body>
 </html>

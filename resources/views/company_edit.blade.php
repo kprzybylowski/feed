@@ -1,10 +1,5 @@
 @extends('layouts.app')
 
-<?php
-//    dump($company);
-?>
-
-
 @section('content')
 <div class="container">
     <div class="row mt-4">

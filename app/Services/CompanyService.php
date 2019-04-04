@@ -43,7 +43,7 @@ class CompanyService
 	}
 
 	/**
-	 * Method creates new company
+	 * Method saves/creates new company
      * 
      * @param array $data Company data collection
      * 

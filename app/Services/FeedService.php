@@ -60,6 +60,7 @@ class FeedService
             ->where('live_feed.is_published', true)
             ->get();
 
+        $data = [];
         if (!empty($liveFeed->toArray())) {
             $data = $liveFeed->map(function($row) {
                 $items = $row->FeedItems->map(function($item) {
