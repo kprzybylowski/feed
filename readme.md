@@ -23,8 +23,8 @@
     mysql> \q
 
 ##### Laravel:
-    $ composer create-project laravel/laravel feed 5.5.*
-    $ git remote add origin https://github.com/kprzybylowski/feed.git
+    $ git clone https://github.com/kprzybylowski/feed.git
+    $ composer install
     $ php artisan migrate (apply all database migrations)
     $ php artisan db:seed (insert data to users_roles)
     $ php artisan storage:link (create a symbolic link from "public/storage" to "storage/app/public")
