@@ -21,7 +21,7 @@
                                     <td class="align-middle">{{ $company->name }}</td>
                                     <td class="align-middle text-right">
                                         <a href="/company/edit/{{$company->id}}" class="btn btn-outline-secondary btn-sm">Edit</a>
-                                        <a href="/company/delete/{{$company->id}}" class="btn btn-outline-danger btn-sm">Delete</a>
+                                        <a href="/company/delete/{{$company->id}}" class="btn btn-outline-danger btn-sm" onclick="return confirm('Are you sure you want to delete company {{ $company->name }} ?')">Delete</a>
                                     </td>
                                 </tr>
                             @endforeach

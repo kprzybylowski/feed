@@ -68,7 +68,7 @@ class CompanyController extends Controller
             $this->companyService->saveCompany($companyData);
         }
 
-        $message = 'ok';
+        $message = empty($companyData['id'])?'Company created successfully':'Company updated successfully';
         $type = 'success';
         return redirect('/company/browse')->with($message, $message)->with('type', $type);
     }
@@ -87,8 +87,8 @@ class CompanyController extends Controller
             $this->companyService->deleteCompany($id);
         }
 
-        $message = 'ok';
+        $message = 'Company deleted successfully';
         $type = 'success';
-        return redirect('/company/browse')->with($message, $message)->with('type', $type);
+        return redirect('/company/browse')->with('message', $message)->with('type', $type);
     }
 }

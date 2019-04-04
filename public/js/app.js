@@ -993,6 +993,10 @@ var app = new Vue({
   el: '#app'
 });
 
+$(document).ready(function () {
+  $('.alert').slideDown().delay(1000).slideUp();
+});
+
 /***/ }),
 /* 11 */
 /***/ (function(module, exports, __webpack_require__) {
