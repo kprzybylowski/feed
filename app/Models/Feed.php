@@ -38,11 +38,22 @@ class Feed extends Model
     protected $dates = ['created_at', 'updated_at', 'deleted_at'];
 
     /**
+     * Cascade relations delete
+     */
+    public static function boot() {
+        parent::boot();
+
+        static::deleting(function($feed) {
+             $feed->Items()->delete();
+        });
+    }
+
+    /**
      * Get feed's creator
      */
     public function Creator()
     {
-        return $this->hasOne('App\Models\Users', 'id', 'created_by');
+        return $this->hasOne('App\Models\User', 'id', 'created_by');
     }
 
     /**

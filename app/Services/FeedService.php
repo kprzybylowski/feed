@@ -86,4 +86,126 @@ class FeedService
 
         return $data;
     }
+
+    /**
+     * Method gets feed list
+     * 
+     * @param object $user Current user data object
+     * 
+     * @return object
+     */
+	public function getFeedList($user)
+	{
+        $feed = $this->feedModel->with('Company')->with('Creator')->with('Items');
+
+        if ($user->role->code !== 'admin') {
+            $feed->where('company_id', $user->company_id);
+        }
+
+        $feedList = $feed->get();
+        return $feedList;
+	}
+
+	/**
+	 * Method gets single feed with all related data (company, creator, items)
+	 * 
+	 * @param integer $id Feed identifier
+	 * 
+	 * @return object
+	 */
+	public function getFeed($id)
+	{
+        if (!empty($id)) {
+            $feed = $this->feedModel->with('Company')->with('Creator')->with('Items')->with('Items.PrimaryImg')->with('Items.SecondaryImg')->find($id);
+            return $feed;
+        }
+	}
+
+	/**
+     * Method saves single feed
+     * 
+     * @param object $data Feed data object
+     * 
+     * @return object
+     */
+    public function saveFeed($data)
+    {
+        if (empty($data['id'])) {
+            return $this->feedModel->create($data);
+        } else {
+            return $this->feedModel->where('id', $data['id'])->update($data);
+        }
+    }
+
+    /**
+     * Method deletes feed
+     * 
+     * @param integer $id Feed identifier
+     * 
+     * @return object
+     */
+    public function deleteFeed($id)
+    {
+        if (!empty($id)) {
+            return $this->feedModel->where('id', $id)->delete();
+        }
+    }
+
+    /**
+     * Method gets single feed item with related images
+     * 
+     * @param integer $id Feed item identifier
+     * 
+     * @return object
+     */
+    public function getFeedItem($id)
+    {
+        if (!empty($id)) {
+            $item = $this->feedItemsModel->with('Creator')->with('PrimaryImg')->with('SecondaryImg')->find($id);
+            return $item;
+        }
+    }
+
+    /**
+     * Method saves single feed item data
+     * 
+     * @param object $data Feed data object
+     * 
+     * @return object
+     */
+    public function saveFeedItem($data)
+    {
+        if (empty($data['id'])) {
+            return $this->feedItemsModel->create($data);
+        } else {
+            return $this->feedItemsModel->where('id', $data['id'])->update($data);
+        }
+    }
+
+    /**
+     * Method gets item's max sort value for feed
+     * 
+     * @param object $feedId Feed identifier
+     * 
+     * @return object
+     */
+    public function findMaxSort($feedId)
+    {
+        return $this->feedItemsModel->where('feed_id', $feedId)->max('sort');
+    }
+
+    /**
+     * Method deletes feed item
+     * 
+     * @param integer $id Feed item identifier
+     * 
+     * @return object
+     */
+    public function deleteFeedItem($id)
+    {
+        if (!empty($id)) {
+            return $this->feedItemsModel->where('id', $id)->delete();
+        }
+    }
+
 }
