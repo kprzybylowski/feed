@@ -1,8 +1,3 @@
-<?php
-
-//dump($users->toArray());
-
-?>
 @extends('layouts.app')
 
 @section('content')

@@ -25,7 +25,7 @@ class HomeController extends Controller
     }
 
     /**
-     * Show the application dashboard.
+     * Application index
      *
      * @return \Illuminate\Http\Response
      */

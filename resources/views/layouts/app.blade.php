@@ -46,6 +46,11 @@
                                 </a>
                             </li>
                         @endif
+                        <li class="nav-item {{ Request::is('images/*')?'active':'' }}">
+                            <a href="/images/browse" class="nav-link" id="images_browse">
+                                Images
+                            </a>
+                        </li>
                     </ul>
                     <ul class="navbar-nav">
                         <li class="nav-item dropdown">
