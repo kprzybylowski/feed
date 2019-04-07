@@ -18,9 +18,13 @@ Route::any('/register', 'HomeController@index')->name('register'); //disable reg
 
 Route::get('/feed', 'FeedController@index')->name('feed');
 Route::get('/feed/browse', 'FeedController@browse')->name('feed_browse')->middleware('auth');
-Route::get('/feed/edit/{id}', 'FeedController@edit')->name('feed_edit')->middleware('auth');
+Route::get('/feed/edit/{id?}', 'FeedController@edit')->name('feed_edit')->middleware('auth');
 Route::get('/feed/delete/{id}', 'FeedController@delete')->name('feed_delete')->middleware('auth');
 Route::post('/feed/save', 'FeedController@save')->name('feed_save')->middleware('auth');
+Route::post('/feed/publish', 'FeedController@publish')->name('feed_publish')->middleware('auth');
+Route::get('/feed/{feed_id}/item_edit/{item_id?}', 'FeedController@item_edit')->name('feed_item_publish')->middleware('auth');
+Route::post('/feed/item_save', 'FeedController@item_save')->name('feed_item_save')->middleware('auth');
+Route::get('/feed/item_delete/{id}', 'FeedController@item_delete')->name('feed_item_delete')->middleware('auth');
 Route::get('/company/browse', 'CompanyController@browse')->name('company_browse')->middleware('auth', 'admin');
 Route::get('/company/edit/{id?}', 'CompanyController@edit')->name('company_edit')->middleware('auth', 'admin');
 Route::any('/company/delete/{id}', 'CompanyController@delete')->name('company_delete')->middleware('auth', 'admin');

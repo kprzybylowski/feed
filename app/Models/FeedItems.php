@@ -50,13 +50,13 @@ class FeedItems extends Model
      */
     public function Creator()
     {
-        return $this->hasOne('App\Models\Users', 'id', 'created_by');
+        return $this->hasOne('App\Models\User', 'id', 'created_by');
     }
 
     /**
      * Get feed_item's primary image
      */
-    public function PrimaryImage()
+    public function PrimaryImg()
     {
         return $this->hasOne('App\Models\Images', 'id', 'primary_image');
     }
@@ -64,7 +64,7 @@ class FeedItems extends Model
     /**
      * Get feed_item's secondary image
      */
-    public function SecondaryImage()
+    public function SecondaryImg()
     {
         return $this->hasOne('App\Models\Images', 'id', 'secondary_image');
     }

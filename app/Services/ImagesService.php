@@ -22,16 +22,15 @@ class ImagesService
 	/**
 	 * Method gets images list
 	 * 
-     * @param object $user Current user data object
+     * @param integer $companyId Company identifier
      * 
 	 * @return object
 	 */
-	public function getImages($user)
+	public function getImages($companyId)
 	{
         $images = $this->imagesModel->with('Company')->with('Creator');
-
-        if ($user->role->code !== 'admin') {
-            $images->where('company_id', $user->company_id);
+        if (!empty($companyId)) {
+            $images->where('company_id', $companyId);
         }
 
         $imagesList = $images->get();

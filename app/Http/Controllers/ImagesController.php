@@ -40,7 +40,8 @@ class ImagesController extends Controller
     public function browse() {
         $auth = Auth::user();
         $user = $this->userService->getUser($auth->id);
-        $imagesList = $this->imagesService->getImages($user);
+        $companyId = $user->role->code !== 'admin'?$user->company_id:null;
+        $imagesList = $this->imagesService->getImages($companyId);
         return view('images_browse', ['images'=>$imagesList, 'user'=>$user]);
     }
 
@@ -85,7 +86,7 @@ class ImagesController extends Controller
 
         $this->imagesService->saveImage($imageData);
         $request->file('image')->store('public');
-        return redirect('/images/browse')->with('message', 'File '.$filename.' uploaded successfully')->with('type', 'success');
+        return redirect('/images/browse')->with('message', 'File '.$originalName.' uploaded successfully')->with('type', 'success');
     }
 
     /**
