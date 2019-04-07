@@ -29,3 +29,7 @@ Route::get('/user/browse', 'UserController@browse')->name('user_browse')->middle
 Route::get('/user/edit/{id?}', 'UserController@edit')->name('user_edit')->middleware('auth', 'admin');
 Route::get('/user/delete/{id}', 'UserController@delete')->name('user_delete')->middleware('auth', 'admin');
 Route::post('/user/save', 'UserController@save')->name('user_save')->middleware('auth', 'admin');
+Route::get('/images/browse', 'ImagesController@browse')->name('images_browse')->middleware('auth');
+Route::get('/images/edit/{id?}', 'ImagesController@edit')->name('images_edit')->middleware('auth');
+Route::get('/images/delete/{id}', 'ImagesController@delete')->name('images_delete')->middleware('auth');
+Route::post('/images/save', 'ImagesController@save')->name('images_save')->middleware('auth');

@@ -23,4 +23,11 @@ const app = new Vue({
 
 $(document).ready(function(){
     $('.alert').slideDown().delay(1000).slideUp();
+
+    $(document).on("click", ".openImageModal", function () {
+         var src = $(this).data('src');
+         var label = $(this).data('label');
+         $(".modal-body #image").attr('src', src);
+         $(".modal-header #imageModalLabel").html(label);
+    });
 });

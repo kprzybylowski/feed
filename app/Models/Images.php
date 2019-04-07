@@ -50,6 +50,6 @@ class Images extends Model
      */
     public function Creator()
     {
-        return $this->hasOne('App\Models\Users', 'id', 'created_by');
+        return $this->hasOne('App\Models\User', 'id', 'created_by');
     }
 }
