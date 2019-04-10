@@ -3,10 +3,11 @@
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class Companies extends Model
+class Companies extends Model implements Auditable
 {
-
+    use \OwenIt\Auditing\Auditable;
     use SoftDeletes;
 
     /**

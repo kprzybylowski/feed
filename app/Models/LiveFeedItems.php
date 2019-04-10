@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Contracts\Auditable;
 
-class Feed extends Model implements Auditable
+class LiveFeedItems extends Model implements Auditable
 {
     use \OwenIt\Auditing\Auditable;
     use SoftDeletes;
@@ -15,7 +15,7 @@ class Feed extends Model implements Auditable
      *
      * @var string
      */
-    protected $table = 'feed';
+    protected $table = 'live_feed_items';
 
     /**
      * Primary key field.
@@ -29,7 +29,7 @@ class Feed extends Model implements Auditable
      *
      * @var array
      */
-    protected $fillable = ['company_id', 'name', 'created_by'];
+    protected $fillable = ['live_feed_id', 'primary_image', 'secondary_image', 'title', 'created_by', 'sort'];
 
     /**
      * The attributes that should be mutated to dates.
@@ -39,18 +39,15 @@ class Feed extends Model implements Auditable
     protected $dates = ['created_at', 'updated_at', 'deleted_at'];
 
     /**
-     * Cascade relations delete
+     * Get feed_items's feed
      */
-    public static function boot() {
-        parent::boot();
-
-        static::deleting(function($feed) {
-             $feed->Items()->delete();
-        });
+    public function Feed()
+    {
+        return $this->hasOne('App\Models\Feed', 'id', 'feed_id');
     }
 
     /**
-     * Get feed's creator
+     * Get feed_item's creator
      */
     public function Creator()
     {
@@ -58,18 +55,18 @@ class Feed extends Model implements Auditable
     }
 
     /**
-     * Get feed's company
+     * Get feed_item's primary image
      */
-    public function Company()
+    public function PrimaryImg()
     {
-        return $this->hasOne('App\Models\Companies', 'id', 'company_id');
+        return $this->hasOne('App\Models\Images', 'id', 'primary_image');
     }
 
     /**
-     * Get feed's items
+     * Get feed_item's secondary image
      */
-    public function Items()
+    public function SecondaryImg()
     {
-        return $this->hasMany('App\Models\FeedItems', 'feed_id', 'id');
+        return $this->hasOne('App\Models\Images', 'id', 'secondary_image');
     }
 }

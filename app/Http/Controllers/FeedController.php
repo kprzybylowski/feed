@@ -117,6 +117,34 @@ class FeedController extends Controller
         return redirect('/feed/browse')->with('message', $message)->with('type', $type);
     }
 
+
+    /**
+     * Publish feed
+     * 
+     * @param \Illuminate\Http\Request $request Request data collection
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function publish(Request $request)
+    {
+        $user = Auth::user();
+        $feedId = $request->route('id');
+        $feed = $this->feedService->getFeed($feedId);
+
+        $feedItemsData = $feed->items;
+        $feedData = [
+            'feed_id' => $feedId,
+            'company_id' => $feed->company_id,
+            'is_published' => true,
+            'published_by' => $user->id
+        ];
+
+        $this->feedService->publishFeed($feedData, $feedItemsData);
+        $message = 'Feed published successfully';
+        $type = 'success';
+        return redirect('/feed/browse')->with('message', $message)->with('type', $type);
+    }
+
     /**
      * Delete feed
      * 

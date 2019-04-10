@@ -3,10 +3,11 @@
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class LiveFeed extends Model
+class LiveFeed extends Model implements Auditable
 {
-
+    use \OwenIt\Auditing\Auditable;
     use SoftDeletes;
 
     /**

@@ -26,6 +26,11 @@
                                     <td class="align-middle">{{ $feed->creator->name }}</td>
                                     <td class="align-middle">{{ $feed->items->count() }}</td>
                                     <td class="align-middle text-right">
+                                        @if ($feed->items->count() === 0)
+                                            <button disabled=disabled class="btn btn-outline-success btn-sm">Publish</button>
+                                        @else
+                                            <a href="/feed/publish/{{$feed->id}}" onclick="return confirm('Are you sure you want to publish this version of feed and overwrite the previous one?')" class="btn btn-success btn-sm">Publish</a>
+                                        @endif
                                         <a href="/feed/edit/{{$feed->id}}" class="btn btn-outline-secondary btn-sm">Edit</a>
                                         <a href="/feed/delete/{{$feed->id}}" class="btn btn-outline-danger btn-sm" onclick="return confirm('Are you sure you want to delete feed {{ $feed->name }} ?')">Delete</a>
                                     </td>
