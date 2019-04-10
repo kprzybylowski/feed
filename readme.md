@@ -42,11 +42,13 @@
 
 
 #### Tables:
+    audits
     companies
     feed
     feed_item
     images
     live_feed
+    live_feed_items
     migrations
     password_resets
     users
