@@ -3,6 +3,7 @@
 use App\Models\User;
 use App\Models\UsersRoles;
 use App\Models\LiveFeed;
+use App\Models\LiveFeedItems;
 use App\Models\Feed;
 use App\Models\FeedItems;
 
@@ -11,25 +12,28 @@ class FeedService
     protected $usersModel;
     protected $usersRolesModel;
     protected $liveFeedModel;
+    protected $liveFeedItemsModel;
     protected $feedModel;
     protected $feedItemsModel;
 
     /**
      * Constructor
      * 
-     * @param User       $users
-     * @param UsersRoles $usersRoles
-     * @param LiveFeed   $liveFeed
-     * @param Feed       $feed
-     * @param FeedItems  $feedItems
+     * @param User          $users
+     * @param UsersRoles    $usersRoles
+     * @param LiveFeed      $liveFeed
+     * @param LiveFeedItems $liveFeedItems
+     * @param Feed          $feed
+     * @param FeedItems     $feedItems
      * 
      * @return void
      */
-    public function __construct(User $users, UsersRoles $usersRoles, LiveFeed $liveFeed, Feed $feed, FeedItems $feedItems)
+    public function __construct(User $users, UsersRoles $usersRoles, LiveFeed $liveFeed, LiveFeedItems $liveFeedItems, Feed $feed, FeedItems $feedItems)
     {
         $this->usersModel = $users;
         $this->usersRolesModel = $usersRoles;
         $this->liveFeedModel = $liveFeed;
+        $this->liveFeedItemsModel = $liveFeedItems;
         $this->feedModel = $feed;
         $this->feedItemsModel = $feedItems;
     }
@@ -134,6 +138,37 @@ class FeedService
             return $this->feedModel->create($data);
         } else {
             return $this->feedModel->where('id', $data['id'])->update($data);
+        }
+    }
+
+	/**
+     * Method publishes single feed
+     * 
+     * @param array $feed  Feed data
+     * @param array $items Feed items data
+     * 
+     * @return void
+     */
+    public function publishFeed($feed, $items)
+    {
+        $this->liveFeedModel->where('company_id', $feed['company_id'])->update(['is_published'=>false]);
+        $liveFeed = new LiveFeed;
+        $liveFeed->fill($feed);
+        $liveFeed->save();
+
+        foreach ($items as $item) {
+            $itemData = [
+                "live_feed_id" => $liveFeed->id,
+                "primary_image" => $item->primary_image,
+                "secondary_image" => $item->secondary_image,
+                "title" => $item->title,
+                "sort" => $item->sort,
+                "created_by" => $item->created_by,
+            ];
+
+            $liveFeedItems = new LiveFeedItems;
+            $liveFeedItems->fill($itemData);
+            $liveFeedItems->save();
         }
     }
 
