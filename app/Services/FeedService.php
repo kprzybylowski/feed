@@ -47,30 +47,23 @@ class FeedService
     {
         $liveFeed = $this->liveFeedModel
             ->with([
-                'FeedItems'=>function($query){
+                'Company',
+                'LiveFeedItems'=>function($query){
                     $query->orderBy('sort', 'asc');
                 },
-                'FeedItems.PrimaryImage',
-                'FeedItems.SecondaryImage'
+                'LiveFeedItems.PrimaryImg',
+                'LiveFeedItems.SecondaryImg'
             ])
-            ->leftJoin('feed', 'live_feed.feed_id', 'feed.id')
-            ->leftJoin('companies', 'feed.company_id', 'companies.id')
-            ->select(
-                'live_feed.feed_id',
-                'companies.name as company_name',
-                'live_feed.company_id',
-                'feed.name as feed_name'
-            )
             ->where('live_feed.is_published', true)
             ->get();
 
         $data = [];
         if (!empty($liveFeed->toArray())) {
             $data = $liveFeed->map(function($row) {
-                $items = $row->FeedItems->map(function($item) {
+                $items = $row->LiveFeedItems->map(function($item) {
                     return [
-                        'primary_image' => asset('storage/'.$item->PrimaryImage->name),
-                        'secondary_image' => asset('storage/'.$item->SecondaryImage->name),
+                        'primary_image' => asset('storage/'.$item->PrimaryImg->name),
+                        'secondary_image' => asset('storage/'.$item->SecondaryImg->name),
                         'title' => $item->title,
                         'created_at' => $item->created_at->format('Y-m-d H:i:s'),
                         'updated_at' => $item->updated_at->format('Y-m-d H:i:s'),
@@ -79,11 +72,11 @@ class FeedService
                 });
 
                 return [
-                    'company_name' => $row->company_name,
-                    'company_id' => $row->company_id,
+                    'company_name' => $row->company->name,
+                    'company_id' => $row->company->id,
                     'feed_items' => $items->toArray(),
-                    'total_feed_items' => $row->FeedItems->count(),
-                    'feed_name' => $row->feed_name,
+                    'total_feed_items' => $row->LiveFeedItems->count(),
+                    'feed_name' => $row->name,
                 ];
             });
         }
@@ -100,7 +93,7 @@ class FeedService
      */
 	public function getFeedList($user)
 	{
-        $feed = $this->feedModel->with('Company')->with('Creator')->with('Items');
+        $feed = $this->feedModel->with('Company')->with('Creator')->with('Items')->with('LiveFeed');
 
         if ($user->role->code !== 'admin') {
             $feed->where('company_id', $user->company_id);

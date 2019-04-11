@@ -29,7 +29,7 @@ class LiveFeed extends Model implements Auditable
      *
      * @var array
      */
-    protected $fillable = ['feed_id', 'company_id', 'is_published', 'published_by'];
+    protected $fillable = ['feed_id', 'company_id', 'name', 'is_published', 'published_by'];
 
     /**
      * The attributes that should be mutated to dates.
@@ -49,11 +49,18 @@ class LiveFeed extends Model implements Auditable
     /**
      * Get live_feed's feed items
      */
-    public function FeedItems()
+    public function LiveFeedItems()
     {
-        return $this->hasMany('App\Models\FeedItems', 'feed_id', 'feed_id');
+        return $this->hasMany('App\Models\LiveFeedItems', 'live_feed_id', 'id');
     }
 
+    /**
+     * Get feed's company
+     */
+    public function Company()
+    {
+        return $this->hasOne('App\Models\Companies', 'id', 'company_id');
+    }
     /**
      * Get live_feed's creator
      */
