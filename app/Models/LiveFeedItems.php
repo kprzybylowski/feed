@@ -41,9 +41,9 @@ class LiveFeedItems extends Model implements Auditable
     /**
      * Get feed_items's feed
      */
-    public function Feed()
+    public function LiveFeed()
     {
-        return $this->hasOne('App\Models\Feed', 'id', 'feed_id');
+        return $this->hasOne('App\Models\LiveFeed', 'id', 'live_feed_id');
     }
 
     /**

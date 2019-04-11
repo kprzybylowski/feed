@@ -15,16 +15,19 @@
                             <th scope="col">Company</th>
                             <th scope="col">Created by</th>
                             <th scope="col">Items count</th>
+                            <th scope="col">Published</th>
                             <th scope="col"></th>
                         </thead>
                         <tbody>
                             @foreach($feedList as $feed)
+                                <?php $isPublished = !empty($feed->LiveFeed && filter_var($feed->LiveFeed->is_published, FILTER_VALIDATE_BOOLEAN) == true); ?>
                                 <tr>
                                     <th scope="row" class="align-middle">{{ $feed->id }}</th>
                                     <td class="align-middle">{{ $feed->name }}</td>
                                     <td class="align-middle">{{ $feed->company->name }}</td>
                                     <td class="align-middle">{{ $feed->creator->name }}</td>
                                     <td class="align-middle">{{ $feed->items->count() }}</td>
+                                    <td class="align-middle"><span class="badge badge-{{ $isPublished?'primary':'light' }}">{{ $isPublished?'Yes':'No' }}</span></td>
                                     <td class="align-middle text-right">
                                         @if ($feed->items->count() === 0)
                                             <button disabled=disabled class="btn btn-outline-success btn-sm">Publish</button>

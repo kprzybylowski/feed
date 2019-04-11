@@ -134,6 +134,7 @@ class FeedController extends Controller
         $feedItemsData = $feed->items;
         $feedData = [
             'feed_id' => $feedId,
+            'name' => $feed->name,
             'company_id' => $feed->company_id,
             'is_published' => true,
             'published_by' => $user->id

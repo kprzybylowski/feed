@@ -31,7 +31,9 @@
                                 <div class="col-md-6">
                                     <select class="form-control" @if ($data['user_role'] !== 'admin') disabled='disabled' @endif required name="company_id" id="company_id">
                                         @foreach ($data['companies'] as $company)
-                                            <option value="{{ $company->id }}" @if ((!empty($data['feed']->id) && $company->id === $data['company_id']) || (!empty($data['feed']->id) && $company->id === $data['feed']->company_id)) selected="selected" @endif >
+                                            <option value="{{ $company->id }}" 
+                                            @if ((empty($data['feed']->id) && $company->id === $data['company_id']) || (!empty($data['feed']->id) && $company->id === $data['feed']->company_id)) selected="selected" 
+                                            @endif >
                                                 {{ $company->name }}
                                             </option>
                                         @endforeach
